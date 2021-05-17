@@ -17,6 +17,7 @@
 		49BE82EE265304D9001CEC2A /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE82ED265304D9001CEC2A /* UILabel+Animation.swift */; };
 		49BE82F026530542001CEC2A /* UITextView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE82EF26530542001CEC2A /* UITextView+Animation.swift */; };
 		49BE82F226530637001CEC2A /* UIWindow+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE82F126530637001CEC2A /* UIWindow+Animation.swift */; };
+		49BE82FB26533077001CEC2A /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE82FA26533077001CEC2A /* DisplayLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		49BE82ED265304D9001CEC2A /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		49BE82EF26530542001CEC2A /* UITextView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Animation.swift"; sourceTree = "<group>"; };
 		49BE82F126530637001CEC2A /* UIWindow+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Animation.swift"; sourceTree = "<group>"; };
+		49BE82FA26533077001CEC2A /* DisplayLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				49BE82ED265304D9001CEC2A /* UILabel+Animation.swift */,
 				49BE82EF26530542001CEC2A /* UITextView+Animation.swift */,
 				49BE82F126530637001CEC2A /* UIWindow+Animation.swift */,
+				49BE82FA26533077001CEC2A /* DisplayLink.swift */,
 			);
 			name = Sources;
 			path = ../Sources;
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49A6F79A26508AAB002EB98D /* ViewController.swift in Sources */,
+				49BE82FB26533077001CEC2A /* DisplayLink.swift in Sources */,
 				49BE82EA26530328001CEC2A /* UIKit+Animations.swift in Sources */,
 				49BE82EC26530463001CEC2A /* UIImageView+Animation.swift in Sources */,
 				49BE82EE265304D9001CEC2A /* UILabel+Animation.swift in Sources */,

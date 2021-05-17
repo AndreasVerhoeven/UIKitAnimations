@@ -66,3 +66,18 @@ Example:
 ```
 window.setRootViewController(newViewController, animated: true)
 ```
+
+## DisplayLink
+
+DisplayLink is a small wrapper around `CADisplayLink` that uses a block callback and stops the display link whenever it gets deallocated.
+
+Example:
+```
+var displayLink = DisplayLink.started {
+	print("frame")
+}
+
+DispatchQueue.main.asyncAfter(.now() + 1) {
+	displayLink = nil
+}
+```
