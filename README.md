@@ -41,7 +41,7 @@ inputTextField.shakeWithHapticErrorFeedback {
 
 Example:
 ```
-imageView.setImage(UIImage(systenNamed: "gearshape"), tintColor: .red, animated: true)
+imageView.setImage(UIImage(systemNamed: "gearshape"), tintColor: .red, animated: true)
 ```
 
 
