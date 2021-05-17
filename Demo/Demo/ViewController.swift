@@ -22,6 +22,14 @@ class ViewController: UIViewController {
 		label.textAlignment = .center
 		view.addSubview(label)
 
+		var counter = 0
+		let displayLink = DisplayLink.started {
+			counter += 1
+			if counter % 30 == 0 {
+				print("frame #\(counter)")
+			}
+		}
+
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 			label.setText("Other text", animated: true)
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -40,6 +48,7 @@ class ViewController: UIViewController {
 
 							DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 								self.view.window?.setRootViewController(OtherViewController())
+								displayLink.stop()
 							}
 						}
 					}

@@ -25,7 +25,7 @@ public class DisplayLink: NSObject {
 	public lazy var caDisplayLink = CADisplayLink(target: internalHandler, selector: #selector(internalHandler.displayLinkFired(_:)))
 
 	/// true if the display link has been started
-	public private(set) var isStarted: Bool  = false
+	public private(set) var isStarted = false
 
 	/// stops the display link from firing if paused
 	public var isPaused: Bool {
