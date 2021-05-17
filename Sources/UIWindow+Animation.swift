@@ -26,7 +26,9 @@ public extension UIWindow {
 		guard rootViewController !== viewController else { return }
 
 		self.performTransitionIfNeeded(animated: animated, duration: duration, delay: 0, options: options, animations: {
-			self.rootViewController = viewController
+			UIView.performWithoutAnimation {
+				self.rootViewController = viewController
+			}
 		}, completion: completion)
 	}
 

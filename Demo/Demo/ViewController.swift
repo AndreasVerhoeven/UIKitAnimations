@@ -37,10 +37,22 @@ class ViewController: UIViewController {
 						self.view.performTransitionIfNeeded(animated: shouldAnimate) {
 							label.textColor = .label
 							self.view.overrideUserInterfaceStyle = .dark
+
+							DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+								self.view.window?.setRootViewController(OtherViewController())
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+}
+
+
+class OtherViewController: UIViewController {
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		view.backgroundColor = .green
 	}
 }
