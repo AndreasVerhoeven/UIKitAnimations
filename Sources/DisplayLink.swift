@@ -56,7 +56,7 @@ public class DisplayLink: NSObject {
 	}
 
 	deinit {
-		stop()
+		caDisplayLink.invalidate()
 	}
 
 	/// Starts the display link. Won't do anything if already started.
@@ -68,6 +68,8 @@ public class DisplayLink: NSObject {
 	public func start(in runloop: RunLoop = .main, mode: RunLoop.Mode = .common) {
 		guard isStarted == false else { return }
 		isStarted = true
+		self.runloop = runloop
+		self.mode = mode
 		caDisplayLink.add(to: runloop, forMode: mode)
 	}
 
@@ -75,7 +77,7 @@ public class DisplayLink: NSObject {
 	public func stop() {
 		guard isStarted == true else { return }
 		isStarted = false
-		caDisplayLink.invalidate()
+		caDisplayLink.remove(from: runloop, forMode: mode)
 	}
 
 	// MARK: - Private
@@ -89,4 +91,6 @@ public class DisplayLink: NSObject {
 		}
 	}
 	private var internalHandler = InternalHandler()
+	private var runloop: RunLoop = .main
+	private var mode: RunLoop.Mode = .common
 }
