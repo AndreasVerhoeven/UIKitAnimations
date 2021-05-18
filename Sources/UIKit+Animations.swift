@@ -47,7 +47,7 @@ public extension UIView {
 		}
 	}
 
-	/// Performs a transition animation if animated == true
+	/// Performs updates animation if animated == true
 	///
 	/// - Parameters:
 	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
@@ -63,9 +63,55 @@ public extension UIView {
 										  animations: @escaping () -> Void,
 										  completion: ((Bool) -> Void)? = nil) {
 		if animated == true {
-			UIView.animate(withDuration: duration, delay: delay, options: [.beginFromCurrentState, .allowUserInteraction], animations: animations, completion: completion)
+			UIView.animate(withDuration: duration, delay: delay, options: options, animations: animations, completion: completion)
 		} else {
 			animations()
+			completion?(true)
+		}
+	}
+
+	/// Animates layout changes in a view
+	///
+	/// - Parameters:
+	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
+	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- delay: **optional**  the animation delay, defaults to 0
+	///		- options: **optional** the options for the animation, defaults to `.beginFromCurrentState`
+	///		- animations: the updates to apply for the transition
+	///		- completion: **optional** the completion handler to call, defaults to nil
+	func animateLayoutUpdates(duration: TimeInterval = 0.25,
+							  delay: TimeInterval = 0,
+							  options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction],
+							  animations: @escaping () -> Void,
+							  completion: ((Bool) -> Void)? = nil) {
+		layoutIfNeeded()
+		UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
+			animations()
+			self.setNeedsLayout()
+			self.layoutIfNeeded()
+		}, completion: completion)
+	}
+
+	/// Performs a transition animation if animated == true
+	///
+	/// - Parameters:
+	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
+	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- delay: **optional**  the animation delay, defaults to 0
+	///		- options: **optional** the options for the animation, defaults to `.beginFromCurrentState`
+	///		- animations: the updates to apply for the transition
+	///		- completion: **optional** the completion handler to call, defaults to nil
+	func performLayoutUpdates(animated: Bool,
+							  duration: TimeInterval = 0.25,
+							  delay: TimeInterval = 0,
+							  options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction],
+							  animations: @escaping () -> Void,
+							  completion: ((Bool) -> Void)? = nil) {
+		if animated == true {
+			animateLayoutUpdates(duration: duration, delay: delay, options: options, animations: animations, completion: completion)
+		} else {
+			animations()
+			setNeedsLayout()
 			completion?(true)
 		}
 	}
