@@ -69,6 +69,19 @@ public extension UIView {
 			completion?(true)
 		}
 	}
+
+	/// Removes all animations in the complete hierarchy
+	func removeAllAnimationsInHierchy() {
+		removeAllAnimations()
+		for subview in subviews {
+			subview.removeAllAnimationsInHierchy()
+		}
+	}
+
+	/// Removes all animations in this view
+	func removeAllAnimations() {
+		layer.removeAllAnimations()
+	}
 }
 
 public extension UIView {
