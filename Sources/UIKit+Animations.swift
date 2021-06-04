@@ -117,10 +117,10 @@ public extension UIView {
 	}
 
 	/// Removes all animations in the complete hierarchy
-	func removeAllAnimationsInHierchy() {
+	func removeAllAnimationsInHierarchy() {
 		removeAllAnimations()
 		for subview in subviews {
-			subview.removeAllAnimationsInHierchy()
+			subview.removeAllAnimationsInHierarchy()
 		}
 	}
 
