@@ -77,7 +77,7 @@ extension UIScrollView {
 	/// 	- maximum: the maximum value we can be at
 	/// 	- resistance: **optional** how much the rubber band should resist extending, defaults to 0.55 (which is UIScrollView's default)
 	/// - Returns: the value we should "scroll" to
-	public func applyRubberBandEffect(for value: CGFloat, minimum: CGFloat, maximum: CGFloat, resistance: CGFloat = 0.55) -> CGFloat {
+	public static func applyRubberBandEffect(for value: CGFloat, minimum: CGFloat, maximum: CGFloat, resistance: CGFloat = 0.55) -> CGFloat {
 		// * x = distance from the edge
 		// * c = constant value, UIScrollView uses 0.55
 		// * d = dimension, either width or height
