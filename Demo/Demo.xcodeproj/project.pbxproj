@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4937AE552743F6030030CB2E /* UIScrollView+Rubberbanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4937AE542743F6030030CB2E /* UIScrollView+Rubberbanding.swift */; };
 		49A6F79626508AAB002EB98D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F79526508AAB002EB98D /* AppDelegate.swift */; };
 		49A6F79826508AAB002EB98D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F79726508AAB002EB98D /* SceneDelegate.swift */; };
 		49A6F79A26508AAB002EB98D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F79926508AAB002EB98D /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4937AE542743F6030030CB2E /* UIScrollView+Rubberbanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rubberbanding.swift"; sourceTree = "<group>"; };
 		49A6F79226508AAB002EB98D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A6F79526508AAB002EB98D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49A6F79726508AAB002EB98D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				49BE82EF26530542001CEC2A /* UITextView+Animation.swift */,
 				49BE82F126530637001CEC2A /* UIWindow+Animation.swift */,
 				49BE82FA26533077001CEC2A /* DisplayLink.swift */,
+				4937AE542743F6030030CB2E /* UIScrollView+Rubberbanding.swift */,
 			);
 			name = Sources;
 			path = ../Sources;
@@ -162,6 +165,7 @@
 			files = (
 				49A6F79A26508AAB002EB98D /* ViewController.swift in Sources */,
 				49BE82FB26533077001CEC2A /* DisplayLink.swift in Sources */,
+				4937AE552743F6030030CB2E /* UIScrollView+Rubberbanding.swift in Sources */,
 				49BE82EA26530328001CEC2A /* UIKit+Animations.swift in Sources */,
 				49BE82EC26530463001CEC2A /* UIImageView+Animation.swift in Sources */,
 				49BE82EE265304D9001CEC2A /* UILabel+Animation.swift in Sources */,
