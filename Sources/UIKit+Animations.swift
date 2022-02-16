@@ -139,8 +139,6 @@ public extension UIView {
 	///		- delay: **optional** the delay before the animation starts, defaults to 0
 	///		- completion: **optional** the block to call when the animation ends, defaults to nil
 	func shake(duration: TimeInterval = 0.6, delay: TimeInterval = 0, completion: ((Bool) -> Void)? = nil) {
-		UINotificationFeedbackGenerator().notificationOccurred(.error)
-
 		UIView.animateKeyframes(withDuration: 0.6, delay: 0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
 			UIView.addKeyframe(withRelativeStartTime: 0.0/9.0, relativeDuration: 1.0/9.0, animations: {self.transform = .init(translationX: -10, y: 0)})
 			UIView.addKeyframe(withRelativeStartTime: 1.0/9.0, relativeDuration: 1.0/9.0, animations: {self.transform = .init(translationX: +10, y: 0)})
