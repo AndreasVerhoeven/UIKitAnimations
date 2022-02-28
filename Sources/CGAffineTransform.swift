@@ -8,6 +8,21 @@
 import UIKit
 
 extension CGAffineTransform {
+	/// Creates a transform that transforms the `from` rectangle to the `to` rectangle
+	///
+	///  - Parameters:
+	///  	- from: the rectangle we want to apply the transform to
+	///  	- to: the rectangle we should end up after applying the transform to `from`
+	public init(from: CGRect, to: CGRect) {
+		let scaleX = from.width != 0 ? to.width / from.width : 0
+		let scaleY = from.height != 0 ? to.height / from.height : 0
+		
+		let translateX = to.midX - from.midX
+		let translateY = to.midY - from.midY
+		
+		self = CGAffineTransform(translationX: translateX, y: translateY).scaledBy(x: scaleX, y: scaleY)
+	}
+	
 	/// A transform with the same x and y scale
 	public init(scale: CGFloat) {
 		self.init(scaleX: scale, y: scale)
@@ -59,7 +74,7 @@ extension CGAffineTransform {
 
 extension UIView {
 	/// Sets a transform around a given point. Bu default, UIView transforms are applied to the point descrived by the anchorPoint.
-	/// If you want to, for example, scale from a diifferent point, use this method.
+	/// If you want to, for example, scale from a different point, use this method.
 	///
 	/// - Parameters:
 	/// 	- transform: the transform to apply
