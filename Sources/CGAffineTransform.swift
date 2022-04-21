@@ -34,10 +34,32 @@ extension CGAffineTransform {
 		self = CGAffineTransform(scaleX: scaleX, y: scaleY)
 	}
 	
+	/// A transform that scaled by the given width and height
+	public init(scaledTo size: CGSize) {
+		self = CGAffineTransform(scaleX: size.width, y: size.height)
+	}
+	
 	/// A transform with the same x and y scale
 	public init(scale: CGFloat) {
 		self.init(scaleX: scale, y: scale)
 	}
+	
+	/// defines the direction of rotation
+	public enum RotationDirection {
+		case clockwise
+		case counterClockwise
+	}
+	
+	/// Creates a transform for a specific rotation in **degrees** (instead of radions). Also has a direction option, that defaults to clockwise.
+	///
+	///  - Parameters:
+	///  	- degrees: the rotation angle in degrees, so from 0 to 360
+	///		- direction: the direction of rotation, defaults to `.clockwise`.
+	public init(rotationAngleInDegrees degrees: CGFloat, direction: RotationDirection = .clockwise) {
+		let radians = degrees * .pi / 180
+		self = CGAffineTransform(rotationAngle: radians * direction.multiplicationFactor)
+	}
+	
 	
 	/// A transform that translates to the given offset
 	public init(translation offset: CGPoint) {
@@ -55,7 +77,7 @@ extension CGAffineTransform {
 		let fromPointTransform = CGAffineTransform(translationX: -offset.x, y: -offset.y)
 		return fromPointTransform.concatenating(self.concatenating(toPointTransform))
 	}
-
+	
 	/// Returns this transform, but applied around an point in a rect with a given size and a given anchorPoint
 	///
 	/// - Parameters:
@@ -70,7 +92,6 @@ extension CGAffineTransform {
 		return appliedAroundOffset(offset)
 	}
 	
-
 	/// Returns this transform, but applied around an point in a given view
 	///
 	/// - Parameters:
@@ -92,5 +113,15 @@ extension UIView {
 	/// 	- point: the point to apply the transform around
 	public func setTransform(_ transform: CGAffineTransform, around point: CGPoint) {
 		self.transform = transform.appliedAround(point, in: self)
+	}
+}
+
+extension CGAffineTransform.RotationDirection {
+	/// internal helper to get the multiplicationFactor for a given rotation direction
+	internal var multiplicationFactor: CGFloat {
+		switch self {
+			case .clockwise: return 1
+			case .counterClockwise: return -1
+		}
 	}
 }
