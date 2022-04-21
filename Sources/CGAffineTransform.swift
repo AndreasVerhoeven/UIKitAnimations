@@ -23,6 +23,17 @@ extension CGAffineTransform {
 		self = CGAffineTransform(translationX: translateX, y: translateY).scaledBy(x: scaleX, y: scaleY)
 	}
 	
+	/// Creates a transform that transforms the `from` size to the `to` size
+	///
+	///  - Parameters:
+	///  	- from: the size we want to apply the transform to
+	///  	- to: the size we should end up after applying the transform to `from`
+	public init(scaledFrom from: CGSize, to: CGSize) {
+		let scaleX = from.width != 0 ? to.width / from.width : 0
+		let scaleY = from.height != 0 ? to.height / from.height : 0
+		self = CGAffineTransform(scaleX: scaleX, y: scaleY)
+	}
+	
 	/// A transform with the same x and y scale
 	public init(scale: CGFloat) {
 		self.init(scaleX: scale, y: scale)
