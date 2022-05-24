@@ -32,6 +32,11 @@ public class DisplayLink: NSObject {
 		get { caDisplayLink.isPaused }
 		set { caDisplayLink.isPaused  = newValue }
 	}
+	
+	/// the time elapsed between the next frame and the previous frame
+	public var elapsedTime: TimeInterval {
+		return caDisplayLink.targetTimestamp - caDisplayLink.timestamp
+	}
 
 	/// Creates an instance with a callback, will not be started
 	///
