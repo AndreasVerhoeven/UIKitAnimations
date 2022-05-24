@@ -49,7 +49,7 @@ public class DisplayLink: NSObject {
 	///		- runloop: **optional** the runloop to start in, defaults to `.main`
 	///		- mode: **optional** the mode to start in, defaults to `.common`
 	/// - Returns: a started display link
-	static func started(with callback: @escaping Callback, in runloop: RunLoop = .main, mode: RunLoop.Mode = .common) -> DisplayLink {
+	public static func started(with callback: @escaping Callback, in runloop: RunLoop = .main, mode: RunLoop.Mode = .common) -> DisplayLink {
 		let displayLink = DisplayLink(callback: callback)
 		displayLink.start(in: runloop, mode: mode)
 		return displayLink
