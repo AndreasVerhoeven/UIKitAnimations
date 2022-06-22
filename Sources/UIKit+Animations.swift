@@ -164,3 +164,18 @@ public extension UIView {
 	}
 }
 
+public extension UIView {
+	/// Sets shadow on this layers CALayer
+	func setShadow(color: CGColor?, opacity: Float, radius: CGFloat, offset: CGSize = .zero) {
+		layer.shadowColor = color
+		layer.shadowOpacity = opacity
+		layer.shadowRadius = radius
+		layer.shadowOffset = offset
+	}
+
+	/// Sets shadow on this view and returnd self
+	@discardableResult func withShadow(color: CGColor?, opacity: Float, radius: CGFloat, offset: CGSize = .zero) -> Self {
+		setShadow(color: color, opacity: opacity, radius: radius, offset: offset)
+		return self
+	}
+}
