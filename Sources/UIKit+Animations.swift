@@ -83,7 +83,7 @@ public extension UIView {
 		performTransition(duration: duration, animations: {
 			self.isHidden = isHidden
 			if isHidden == true {
-				self.alpha = originalAlpha
+				self.alpha = 0
 			}
 		}, completion: { finished in
 			if isHidden == true && self.isHidden == true {
