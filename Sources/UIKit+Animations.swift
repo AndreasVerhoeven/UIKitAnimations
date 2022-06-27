@@ -8,15 +8,17 @@
 import UIKit
 
 public extension UIView {
+	static var defaultAnimationDuration = TimeInterval(0.3)
+	
 	/// Performs a transition animation in this view
 	///
 	/// - Parameters:
-	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
 	///		- delay: **optional**  the animation delay, defaults to 0
 	///		- options: **optional** the options for the animation, defaults to `.transitionCrossDissolve`
 	///		- animations: the updates to apply for the transition
 	///		- completion: **optional** the completion handler to call, defaults to nil
-	func performTransition(duration: TimeInterval = 0.25,
+	func performTransition(duration: TimeInterval = UIView.defaultAnimationDuration,
 						   delay: TimeInterval = 0,
 						   options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction, .transitionCrossDissolve],
 						   animations: @escaping () -> Void,
@@ -28,13 +30,13 @@ public extension UIView {
 	///
 	/// - Parameters:
 	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
-	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
 	///		- delay: **optional**  the animation delay, defaults to 0
 	///		- options: **optional** the options for the animation, defaults to `.transitionCrossDissolve`
 	///		- animations: the updates to apply for the transition
 	///		- completion: **optional** the completion handler to call, defaults to nil
 	func performTransitionIfNeeded(animated: Bool,
-								   duration: TimeInterval = 0.25,
+								   duration: TimeInterval = UIView.defaultAnimationDuration,
 								   delay: TimeInterval = 0,
 								   options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction, .transitionCrossDissolve],
 								   animations: @escaping() -> Void,
@@ -46,18 +48,58 @@ public extension UIView {
 			completion?(true)
 		}
 	}
+	
+	/// Hides this view, optionally animated
+	///
+	/// - Parameters:
+	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
+	///		- completion: **optional** the completion handler to call, defaults to nil
+	func hide(animated: Bool, duration: TimeInterval = UIView.defaultAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+		setIsHidden(true, animated: animated, duration: duration, completion: completion)
+	}
+	
+	/// Shows this view, optionally animated
+	///
+	/// - Parameters:
+	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
+	///		- completion: **optional** the completion handler to call, defaults to nil
+	func show(animated: Bool, duration: TimeInterval = UIView.defaultAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+		setIsHidden(false, animated: animated, duration: duration, completion: completion)
+	}
+	
+	/// Sets is hidden possibly with cross desolve transition
+	///
+	/// - Parameters:
+	/// 	- isHidden: the new isHidden value
+	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
+	///		- completion: **optional** the completion handler to call, defaults to nil
+	func setIsHidden(_ isHidden: Bool, animated: Bool, duration: TimeInterval = UIView.defaultAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+		guard self.isHidden != isHidden else { return }
+		
+		performTransition(duration: duration, animations: {
+			self.isHidden = isHidden
+		}, completion: completion)
+		
+		// this ensures the animation is correct in UIStackView
+		if animated == true && superview is UIStackView {
+			self.isHidden = isHidden
+		}
+	}
 
 	/// Performs updates animation if animated == true
 	///
 	/// - Parameters:
 	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
-	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
 	///		- delay: **optional**  the animation delay, defaults to 0
 	///		- options: **optional** the options for the animation, defaults to `.beginFromCurrentState`
 	///		- animations: the updates to apply for the transition
 	///		- completion: **optional** the completion handler to call, defaults to nil
 	static func performAnimationsIfNeeded(animated: Bool,
-										  duration: TimeInterval = 0.25,
+										  duration: TimeInterval = UIView.defaultAnimationDuration,
 										  delay: TimeInterval = 0,
 										  options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction],
 										  animations: @escaping () -> Void,
@@ -74,12 +116,12 @@ public extension UIView {
 	///
 	/// - Parameters:
 	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
-	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
 	///		- delay: **optional**  the animation delay, defaults to 0
 	///		- options: **optional** the options for the animation, defaults to `.beginFromCurrentState`
 	///		- animations: the updates to apply for the transition
 	///		- completion: **optional** the completion handler to call, defaults to nil
-	func animateLayoutUpdates(duration: TimeInterval = 0.25,
+	func animateLayoutUpdates(duration: TimeInterval = UIView.defaultAnimationDuration,
 							  delay: TimeInterval = 0,
 							  options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction],
 							  animations: @escaping () -> Void,
@@ -96,13 +138,13 @@ public extension UIView {
 	///
 	/// - Parameters:
 	/// 	- animated: if true, the updates will be animated, otherwise they will not be animation
-	///		- duration: **optional** the duration of the transition, defaults to 0.25
+	///		- duration: **optional** the duration of the transition, defaults to `UIView.defaultAnimationDuration`
 	///		- delay: **optional**  the animation delay, defaults to 0
 	///		- options: **optional** the options for the animation, defaults to `.beginFromCurrentState`
 	///		- animations: the updates to apply for the transition
 	///		- completion: **optional** the completion handler to call, defaults to nil
 	func performLayoutUpdates(animated: Bool,
-							  duration: TimeInterval = 0.25,
+							  duration: TimeInterval = UIView.defaultAnimationDuration,
 							  delay: TimeInterval = 0,
 							  options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction],
 							  animations: @escaping () -> Void,
