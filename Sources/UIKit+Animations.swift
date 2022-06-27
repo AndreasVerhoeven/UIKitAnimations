@@ -79,9 +79,18 @@ public extension UIView {
 	func setIsHidden(_ isHidden: Bool, animated: Bool, duration: TimeInterval = UIView.defaultAnimationDuration, completion: ((Bool) -> Void)? = nil) {
 		guard self.isHidden != isHidden else { return }
 		
+		let originalAlpha = alpha
 		performTransition(duration: duration, animations: {
 			self.isHidden = isHidden
-		}, completion: completion)
+			if isHidden == true {
+				self.alpha = originalAlpha
+			}
+		}, completion: { finished in
+			if isHidden == true && self.isHidden == true {
+				self.alpha = originalAlpha
+			}
+			completion?(finished)
+		})
 		
 		// this ensures the animation is correct in UIStackView
 		if animated == true && superview is UIStackView {
