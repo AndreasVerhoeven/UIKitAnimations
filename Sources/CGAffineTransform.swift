@@ -23,6 +23,18 @@ extension CGAffineTransform {
 		self = CGAffineTransform(translationX: translateX, y: translateY).scaledBy(x: scaleX, y: scaleY)
 	}
 	
+	/// Creates a transform that transforms the `from` point to the `to` point
+	///
+	///  - Parameters:
+	///  	- from: the point we want to apply the transform to
+	///  	- to: the point we should end up after applying the transform to `from`
+	public init(from: CGPoint, to: CGPoint) {
+		let translateX = to.x - from.x
+		let translateY = to.y - from.y
+		
+		self = CGAffineTransform(translationX: translateX, y: translateY)
+	}
+	
 	/// Creates a transform that transforms the `from` size to the `to` size
 	///
 	///  - Parameters:
